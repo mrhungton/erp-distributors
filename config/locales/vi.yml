@@ -1,0 +1,13 @@
+vi:
+  activerecord:
+    errors:
+      models:
+        erp/distributors/distributor:
+          attributes:
+            name:
+              taken: " đã tồn tại!"
+            nnnn:
+            
+    attributes:
+      erp/distributors/distributor:
+        name: "Tên cửa hàng"
