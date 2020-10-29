@@ -12,9 +12,9 @@
   <tbody>
     <% @distributors.each do |distributor| %>
       <tr>
-        <td><%= link_to 'Show', distributor %></td>
-        <td><%= link_to 'Edit', edit_distributor_path(distributor) %></td>
-        <td><%= link_to 'Destroy', distributor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+        <td><%= link_to 'Edit', edit_backend_distributor_path(distributor) %></td>
+        <td><%= button_to 'Destroy', backend_distributor_path(distributor), method: :delete%></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +22,4 @@
 
 <br>
 
-<%= link_to 'New Distributor', new_distributor_path %>
+<%= link_to 'New Distributor', new_backend_distributor_path %>
