@@ -2,18 +2,12 @@ module Erp
   module Distributors
     module Backend
       class DistributorsController < Erp::Backend::BackendController
-        before_action :set_distributor, only: [:show, :edit, :update, :destroy]
-        before_action :set_distributors, only: [:delete_all]
-
+        before_action :set_distributor, only: [:archive, :unarchive, :show, :edit, :update, :destroy]
+        before_action :set_distributors, only: [:delete_all, :archive_all, :unarchive_all]
+        
         # GET /distributors
-        def index
-          @distributors = Distributor.all
-
-          render layout: nil
-        end
-
         def list
-          @distributors = Distributor.all
+          @distributors = Distributor.all.paginate(:page => params[:page], :per_page => 10)
 
           render layout: nil
         end
@@ -93,8 +87,8 @@ module Erp
         end
 
         def delete_all
-          @distributor.destroy_all
-
+          @distributors.destroy_all
+          
           respond_to do |format|
             format.json {
               render json: {
@@ -105,8 +99,71 @@ module Erp
           end
         end
 
+         # Archive /distributor/archive?id=1
+         def archive
+          @distributor.archive
+
+          respond_to do |format|
+          format.json {
+            render json: {
+            'message': t('.success'),
+            'type': 'success'
+            }
+          }
+          end
+        end
+
+        # Unarchive /distributor/unarchive?id=1
+        def unarchive
+          @distributor.unarchive
+
+          respond_to do |format|
+          format.json {
+            render json: {
+            'message': t('.success'),
+            'type': 'success'
+            }
+          }
+          end
+        end
+
+        # Archive /distributors/archive_all?ids=1,2,3
+        def archive_all
+          @distributors.archive_all
+
+          respond_to do |format|
+            format.json {
+              render json: {
+                'message': t('.success'),
+                'type': 'success'
+              }
+            }
+          end
+        end
+
+        # Unarchive /distributors/unarchive_all?ids=1,2,3
+        def unarchive_all
+          @distributors.unarchive_all
+
+          respond_to do |format|
+            format.json {
+              render json: {
+                'message': t('.success'),
+                'type': 'success'
+              }
+            }
+          end
+        end
+
+        def dataselect
+          respond_to do |format|
+            format.json {
+              render json: Distributor.dataselect(params[:keyword])
+            }
+          end
+        end
+
         private
-          # Use callbacks to share common setup or constraints between actions.
           def set_distributor
             @distributor = Distributor.find(params[:id])
           end
@@ -119,6 +176,7 @@ module Erp
           def distributor_params
             params.fetch(:distributor, {}).permit(:name, :address, :image, :open_time, :latitude, :longitude)
           end
+
       end
     end
   end

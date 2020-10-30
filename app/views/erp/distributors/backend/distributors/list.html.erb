@@ -1,4 +1,151 @@
-<p id="notice"><%= notice %></p>
+<table class="table table-advance table-hover table-striped table-checkable order-column">
+    <thead>
+        <tr>
+            <th width='1%'>
+                <%= erp_datalist_check_all %>
+            </th>
+            <% if get_columns(params).include?("image") %>
+                <th><%= 'Ảnh đại diện' %></th>
+            <% end %>
+            <% if get_columns(params).include?("name") %>
+                <th class="sortable" sort-by='erp_products_brands.name'>
+                    <%= 'Tên cửa hàng' %>
+                </th>
+            <% end %>
+            <% if get_columns(params).include?("address") %>
+                <th>
+                    <%= 'Địa chỉ' %>
+                </th>
+            <% end %>
+            <% if get_columns(params).include?("open_time") %>
+                <th><%= 'Thời gian hoạt động' %></th>
+            <% end %>
+           
+             <% if get_columns(params).include?("latitude") %>
+                <th><%= 'Vĩ độ' %></th>
+            <% end %>
+            <% if get_columns(params).include?("longitude") %>
+                <th><%= 'Kinh độ' %></th>
+            <% end %> 
+            <% if get_columns(params).include?("status") %>
+                <th><%= 'Trạng thái' %></th>
+            <% end %>
+            <% if get_columns(params).include?("creator") %>
+                <th><%= t('creator') %></th>
+            <% end %>
+            <% if get_columns(params).include?("created_at") %>
+                <th class="sortable" sort-by='erp_products_brands.created_at'>
+                    <%= t('created_at') %>
+                </th>
+            <% end %>
+            <th width="7%"><%= t('actions') %></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @distributors.each do |distributor| %>
+            <tr class="odd gradeX">
+                <td>
+                    <%= erp_datalist_check_row(id: distributor.id) %>
+                </td>
+               <% if get_columns(params).include?("image") %>
+                    <td>
+                        image
+                    </td>
+                <% end %>
+                <% if get_columns(params).include?("name") %>
+                    <td>
+                        <%= link_to distributor.name, erp_distributors.edit_backend_distributor_path(distributor), class: 'title' %>
+                    </td>
+                <% end %>
+                <% if get_columns(params).include?("address") %>
+                    <td>
+                        <%= distributor.address %>                        
+                    </td>
+                <% end %>
+              
+                <% if get_columns(params).include?("open_time") %>
+                    <td>
+                        <%= distributor.open_time %>                        
+                    </td>
+                <% end %>
+                
+                 <% if get_columns(params).include?("latitude") %>
+                    <td>
+                        <%= distributor.latitude %>                        
+                    </td>
+                <% end %>
 
-<%= link_to 'Edit', edit_backend_distributor_path(@distributor) %> |
-<%= link_to 'Back', backend_distributors_path %>
+                <% if get_columns(params).include?("longitude") %>
+                    <td>
+                        <%= distributor.longitude %>                        
+                    </td>
+                <% end %>
+                
+                 <% if get_columns(params).include?("status") %>
+                    <td>
+                       
+                            <%# <span class="label label-sm label-danger">Ngưng sử dụng</span> %>
+                       
+                            <span class="label label-sm label-success">Đang sử dụng</span>
+                     
+                    </td>
+                <% end %>
+              
+                <% if get_columns(params).include?("creator") %>
+                    <td>
+                        <%= erp_component('avatar', {
+                            user: distributor.creator
+                        }) %>
+                    </td>
+                <% end %>
+
+                <% if get_columns(params).include?("created_at") %>
+                    <td><%= distributor.created_at.strftime("%d/%m/%Y") %></td>
+                <% end %>
+               
+                <td class="text-right">
+                    <%= erp_datalist_row_actions(
+                        [
+                            {
+                                text: '<i class="fa fa-edit"></i> '+t('edit'),
+                                href: erp_distributors.edit_backend_distributor_path(distributor)
+                            },
+                            {
+                                text: '<i class="fa fa-eye-slash"></i> '+t('archive'),
+                               
+                                data_method: 'PUT',
+                               
+                                class: 'ajax-link',
+                                data_confirm: 'Bạn có muốn ngừng sử dụng thông tin cửa hàng này?'
+                            },
+                            {
+                                text: '<i class="fa fa-eye"></i> '+t('unarchive'),
+                              
+                                data_method: 'PUT',
+                               
+                                class: 'ajax-link',
+                                data_confirm: 'Bạn có muốn sử dụng lại thông tin cửa hàng này?'
+                            },
+                            {
+                                divider: true
+                            },
+                            {
+                                text: '<i class="fa fa-trash"></i> '+t('.delete'),
+                                url: erp_distributors.backend_distributor_path(distributor),
+                                data_method: 'DELETE',
+                                class: 'ajax-link',
+                                data_confirm: t('delete_confirm')
+                            }
+                        ]
+                    ) %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<% if @distributors.empty? %>
+    <div class="datalist-empty-line"><%= t('.no_matching_records_found') %></div>
+<% end %>
+
+<%= erp_datalist_pagination(@distributors) %>
+
