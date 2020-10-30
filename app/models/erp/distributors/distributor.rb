@@ -4,7 +4,7 @@ module Erp::Distributors
     belongs_to :creator, class_name: 'Erp::User'
     mount_uploader :image, Erp::Distributors::DistributorImageUploader
 
-    validates :image, :address, :open_time, :latitude, :longitude, presence: true
+    validates :address, :open_time, :latitude, :longitude, presence: true
     validates :name, uniqueness: true, presence: true
 
     validates :image, allow_blank: true, format: {
