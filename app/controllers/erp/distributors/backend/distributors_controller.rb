@@ -39,8 +39,8 @@ module Erp
             if request.xhr?
               render json: {
                 status: 'success',
-                text: @distributor.id,
-                value: @distributor.name
+                text: @distributor.name,
+                value: @distributor.id
               }
             else
               redirect_to erp_distributors.edit_backend_distributor_path(@distributor), notice: 'Distributor was successfully created.'
@@ -60,8 +60,8 @@ module Erp
             if request.xhr?
               render json: {
                 status: 'success',
-                text: @distributor.id,
-                value: @distributor.name
+                text: @distributor.name,
+                value: @distributor.id
               }
             else
               redirect_to erp_distributors.edit_backend_distributor_path(@distributor), notice: 'Distributor was successfully updated.'
