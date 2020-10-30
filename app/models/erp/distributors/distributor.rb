@@ -12,6 +12,7 @@ module Erp::Distributors
 			message: 'URL hình ảnh phải có định dạng: GIF, JPG hoặc PNG.'
 		}
 
+    
     def archive
 			update_columns(archived: true)
 		end
@@ -26,10 +27,6 @@ module Erp::Distributors
 
     def self.unarchive_all
 			update_all(archived: false)
-    end
-    
-    def self.get_active
-			self.where(archived: false)
     end
     
   end

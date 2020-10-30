@@ -106,7 +106,7 @@ module Erp
           respond_to do |format|
           format.json {
             render json: {
-            'message': t('.success'),
+            'message': 'Thông tin cửa hàng đã được ngưng sử dụng',
             'type': 'success'
             }
           }
@@ -120,7 +120,7 @@ module Erp
           respond_to do |format|
           format.json {
             render json: {
-            'message': t('.success'),
+            'message': 'Thông tin cửa hàng đã được sử dụng lại',
             'type': 'success'
             }
           }
