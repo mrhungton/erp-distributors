@@ -37,10 +37,14 @@
           data_confirm: t('delete_confirm')
       }
   ],
-
+  filters: [
+        {
+            text: t('archived'), name: 'show_archived', value: false, checked: false
+        },
+    ],
   columns: [
       {
-          text: 'Ảnh đại diện', name: 'image', value: true, checked: true
+          text: 'Ảnh đại diện', name: 'image', value: true, checked: false
       },
       {
           text: 'Tên cửa hàng', name: 'name', value: true, checked: true
