@@ -4,7 +4,8 @@ Erp::Distributors::Engine.routes.draw do
             resources :distributors do
                 collection do
                     post 'list'
-
+                    get 'dataselect'
+                    delete 'delete_all'
                 end
             end
         end

@@ -13,11 +13,5 @@ module Erp::Distributors
 			message: 'URL hình ảnh phải có định dạng: GIF, JPG hoặc PNG.'
 		}
 
-    after_save :recreate_thumbs
-
-		def recreate_thumbs
-			self.image.recreate_versions!
-		end
-    
   end
 end
