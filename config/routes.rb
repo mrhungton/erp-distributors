@@ -6,6 +6,10 @@ Erp::Distributors::Engine.routes.draw do
                     post 'list'
                     get 'dataselect'
                     delete 'delete_all'
+                    put 'archive_all'
+                    put 'unarchive_all'
+                    put 'archive'
+                    put 'unarchive'
                 end
             end
         end
