@@ -1,6 +1,6 @@
 <li class="nav-item <%= "active open" if ["erp/distributors/backend/distributors"].include?(params[:controller]) %>">
     <a href="javascript:;" class="nav-link nav-toggle">
-        <i class="fa fa-image"></i>
+        <i class="fa fa-map-marker"></i>
         <span class="title">Nhà phân phối</span>
         <% if ["erp/distributors/backend/distributors"].include?(params[:controller]) %>
             <span class="selected"></span>
@@ -12,7 +12,7 @@
     <ul class="sub-menu">
         <li class="nav-item">
             <a href="<%= erp_distributors.backend_distributors_path %>" class="nav-link">
-                <span class="title"><%= t('.distributors') %></span>
+                <span class="title"><%= 'Tất cả cửa hàng' %></span>
             </a>
         </li>
         

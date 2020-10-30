@@ -1,6 +1,29 @@
-<h1>Editing Distributor</h1>
+<% content_for :title do %>
+    <%= @distributor.name %>
+<% end %>
 
-<%= render 'form', distributor: @distributor %>
+<% content_for :page_title do %>    
+    <a href="<%= erp_distributors.backend_distributors_path %>">
+    <i class="fa fa-map-marker"></i> <%= 'Tất cả cửa hàng' %>
+    </a> / <%= @distributor.name %>
+<% end %>
 
-<%= link_to 'Show', @distributor %> |
-<%= link_to 'Back', distributors_path %>
+<% content_for :page_toolbar do %>
+    <%= erp_component('button/create', {
+        text: 'Thêm địa chỉ phân phối của cửa hàng',
+        href: erp_distributors.new_backend_distributor_path,
+        class: 'btn-noborder'
+    }) %>
+<% end %>
+
+<div class="row">
+    <div class="col-md-12">
+        <% if @distributor.errors.any? %>
+            <%= erp_form_control("form_error_message") %>
+        <% end %>
+        
+        <!-- BEGIN SAMPLE FORM PORTLET-->
+        <%= render 'form', distributor: @distributor %>
+        <!-- END SAMPLE FORM PORTLET-->
+    </div>
+</div>

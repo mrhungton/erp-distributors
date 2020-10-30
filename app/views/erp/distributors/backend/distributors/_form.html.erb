@@ -1,17 +1,86 @@
-<%= form_with(model: distributor, local: true) do |form| %>
-  <% if distributor.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(distributor.errors.count, "error") %> prohibited this distributor from being saved:</h2>
-
-      <ul>
-      <% distributor.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_for([erp_distributors, :backend, distributor], html: {multipart: true}) do |f| %>
+    <div class="form-body">
+        <div class="portlet light bordered">
+            <div class="portlet-body form">
+                <div class="row">
+                    <div class="col-md-2">
+                         <%= erp_form_control('image', {
+                            img_src: distributor.image.smaller,
+                            name: 'distributor[image]',
+                            label: 'Hình ảnh đại diện',
+                            required: true,
+                            width: 150,
+                            height: 150
+                        }) %>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <%= erp_form_control("text", {
+                                    name: 'distributor[name]',
+                                    value: distributor.name,                   
+                                    label: 'Tên cửa hàng',
+                                    placeholder: 'Nhập tên cho cửa hàng',
+                                    required: true,
+                                    errors: distributor.errors.full_messages_for(:name)
+                                }) %>
+                            </div>
+                            <div class="col-md-6">
+                                 <%= erp_form_control('text', {
+                                    name: 'distributor[open_time]',
+                                    value: distributor.open_time,                   
+                                    label: 'Thời gian hoạt động',
+                                    placeholder: 'Nhập thời gian đóng, mở cửa (Ví dụ: 7h A.M – 22h P.M)',
+                                    required: true,
+                                    errors: distributor.errors.full_messages_for(:open_time)
+                                }) %>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                               <%= erp_form_control("text", {
+                                    name: 'distributor[address]',
+                                    value: distributor.address,                   
+                                    label: 'Địa chỉ cửa hàng',
+                                    required: true,
+                                    placeholder: 'Nhập chi tiết địa chỉ của cửa hàng (Số nhà, tên đường, quận, huyện,…)',
+                                    rows: 1
+                                }) %>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <%= erp_form_control("text", {
+                                    name: 'distributor[latitude]',
+                                    value: distributor.latitude,                   
+                                    label: 'Nhập vĩ độ (latitude)',
+                                    placeholder: 'Nhập chính xác vĩ độ của cửa hàng (Ví dụ: 10.792294)',
+                                    required: true,
+                                    errors: distributor.errors.full_messages_for(:latitude)
+                                }) %>
+                            </div>
+                            <div class="col-md-6">
+                                 <%= erp_form_control('text', {
+                                    name: 'distributor[longitude]',
+                                    value: distributor.longitude,                   
+                                    label: 'Nhập kinh độ (longitude) ',
+                                    placeholder: 'Nhập chính xác kinh độ của cửa hàng (Ví dụ: 106.675193)',
+                                    required: true,
+                                    errors: distributor.errors.full_messages_for(:longitude)
+                                }) %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+     <%= erp_component('button/save', {
+        text: t('submit')
+    }) %>
+    <%= erp_component('button/cancel', {
+        text: t('cancel'),
+        href: erp_distributors.backend_distributors_path
+    }) %>
 <% end %>

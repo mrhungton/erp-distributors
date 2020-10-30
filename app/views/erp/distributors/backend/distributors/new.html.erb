@@ -1,5 +1,29 @@
-<h1>New Distributor</h1>
 
-<%= render 'form', distributor: @distributor %>
+<% content_for :title do %>
+    <%= 'Tất cả cửa hàng' %>
+<% end %>
 
-<%= link_to 'Back', distributors_path %>
+<% content_for :page_title do %>    
+    <a href="<%= erp_distributors.backend_distributors_path %>">
+    <i class="fa fa-map-marker"></i> <%= 'Tất cả cửa hàng' %>
+    </a> / <%= 'Thêm địa chỉ phân phối của cửa hàng' %>
+<% end %>
+
+<% content_for :page_toolbar do %>
+    <div class="btn-group">
+        <div class="clearfix">
+        </div>
+    </div>
+<% end %>
+
+<div class="row">
+    <div class="col-md-12">
+        <% if @distributor.errors.any? %>
+            <%= erp_form_control("form_error_message") %>
+        <% end %>
+        
+        <!-- BEGIN SAMPLE FORM PORTLET-->
+        <%= render 'form', distributor: @distributor %>
+        <!-- END SAMPLE FORM PORTLET-->
+    </div>
+</div>
