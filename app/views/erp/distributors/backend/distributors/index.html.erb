@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :page_title do %>
-  <i class="fa fa-"></i> <%= t('.distributors') %>
+  <i class="fa fa-map-marker"></i> <%= 'Tất cả cửa hàng' %>
 <% end %>
 
 <% content_for :page_toolbar do %>
@@ -14,32 +14,11 @@
   }) %>
 <% end %>
 
-<% content_for :global_filter do %>
-  <div class="row top-datalist">
-      <div class="col-md-3">
-          <%= erp_form_control("dataselect", {
-              name: 'category_id',
-              label: 'Chuyên mục',
-              placeholder: 'Tìm theo chuyên mục',
-              url: erp_distributors.dataselect_backend_distributors_path(format: 'json'),
-          }) %>
-      </div>
-  </div>
-<% end %>
-
 <%= erp_datalist(
   url: erp_distributors.list_backend_distributors_path,
   keywords: [
       {
           text: t('.name'), name: 'erp_distributors_distributors.name'
-      },
-      {
-          text: t('.category'),
-          name: 'erp_distributors_categories.name',
-          select: {
-              name: 'erp_distributors_categories.id',
-              data_url: erp_distributors.dataselect_backend_distributors_path
-          }
       },
       {
           text: t('creator'),
@@ -58,32 +37,29 @@
           data_confirm: t('delete_confirm')
       }
   ],
-  filters: [
-      {
-          text: t('archived'), name: 'show_archived', value: false, checked: false
-      },
-  ],
+
   columns: [
       {
-          text: t('image'), name: 'image', value: true, checked: true
+          text: 'Ảnh đại diện', name: 'image', value: true, checked: true
       },
       {
-          text: t('name'), name: 'name', value: true, checked: true
+          text: 'Tên cửa hàng', name: 'name', value: true, checked: true
       },
       {
-          text: t('address'), name: 'address', value: true, checked: true
+          text: 'Địa chỉ', name: 'address', value: true, checked: true
       },
       {
-          text: t('open_time'), name: 'open_time', value: true, checked: true
+          text:'Thời gian hoạt động', name: 'open_time', value: true, checked: true
+      },
+     
+      {
+          text: 'Vĩ độ', name: 'latitude', value: true, checked: true
+      },
+      {
+          text: 'Kinh độ', name: 'longitude', value: true, checked: true
       },
       {
           text: t('status'), name: 'status', value: true, checked: true
-      },
-      {
-          text: t('latitude'), name: 'latitude', value: true, checked: false
-      },
-      {
-          text: t('longitude'), name: 'longitude', value: true, checked: false
       },
       {
           text: t('creator'), name: 'creator', value: true, checked: false

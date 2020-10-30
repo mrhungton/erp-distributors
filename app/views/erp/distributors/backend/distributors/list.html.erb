@@ -5,29 +5,30 @@
                 <%= erp_datalist_check_all %>
             </th>
             <% if get_columns(params).include?("image") %>
-                <th width='15%'><%= t('image') %></th>
+                <th><%= 'Ảnh đại diện' %></th>
             <% end %>
             <% if get_columns(params).include?("name") %>
                 <th class="sortable" sort-by='erp_products_brands.name'>
-                    <%= t('.name') %>
+                    <%= 'Tên cửa hàng' %>
                 </th>
             <% end %>
             <% if get_columns(params).include?("address") %>
                 <th>
-                    <%= t('.address') %>
+                    <%= 'Địa chỉ' %>
                 </th>
             <% end %>
             <% if get_columns(params).include?("open_time") %>
-                <th><%= t('open_time') %></th>
+                <th><%= 'Thời gian hoạt động' %></th>
             <% end %>
-            <% if get_columns(params).include?("status") %>
-                <th><%= t('status') %></th>
-            <% end %>
-            <% if get_columns(params).include?("latitude") %>
-                <th><%= t('latitude') %></th>
+           
+             <% if get_columns(params).include?("latitude") %>
+                <th><%= 'Vĩ độ' %></th>
             <% end %>
             <% if get_columns(params).include?("longitude") %>
-                <th><%= t('longitude') %></th>
+                <th><%= 'Kinh độ' %></th>
+            <% end %> 
+            <% if get_columns(params).include?("status") %>
+                <th><%= 'Trạng thái' %></th>
             <% end %>
             <% if get_columns(params).include?("creator") %>
                 <th><%= t('creator') %></th>
@@ -37,9 +38,6 @@
                     <%= t('created_at') %>
                 </th>
             <% end %>
-            <th width="7%" class="sortable text-nowrap" sort-by='erp_distributors_distributors.custom_order'>
-                <%= t('custom_order') %>
-            </th>
             <th width="7%"><%= t('actions') %></th>
         </tr>
     </thead>
@@ -49,9 +47,9 @@
                 <td>
                     <%= erp_datalist_check_row(id: distributor.id) %>
                 </td>
-                <% if get_columns(params).include?("image") %>
+               <% if get_columns(params).include?("image") %>
                     <td>
-                        
+                        image
                     </td>
                 <% end %>
                 <% if get_columns(params).include?("name") %>
@@ -61,16 +59,46 @@
                 <% end %>
                 <% if get_columns(params).include?("address") %>
                     <td>
-                        <%= link_to distributor.address %>                        
+                        <%= distributor.address %>                        
                     </td>
                 <% end %>
               
-               <% if get_columns(params).include?("open_time") %>
+                <% if get_columns(params).include?("open_time") %>
                     <td>
-                        <%= link_to distributor.open_time %>                        
+                        <%= distributor.open_time %>                        
+                    </td>
+                <% end %>
+                
+                 <% if get_columns(params).include?("latitude") %>
+                    <td>
+                        <%= distributor.latitude %>                        
+                    </td>
+                <% end %>
+
+                <% if get_columns(params).include?("longitude") %>
+                    <td>
+                        <%= distributor.longitude %>                        
+                    </td>
+                <% end %>
+                
+                 <% if get_columns(params).include?("status") %>
+                    <td>
+                       
+                            <%# <span class="label label-sm label-danger">Ngưng sử dụng</span> %>
+                       
+                            <span class="label label-sm label-success">Đang sử dụng</span>
+                     
                     </td>
                 <% end %>
               
+                <% if get_columns(params).include?("creator") %>
+                    <td>
+                        <%= erp_component('avatar', {
+                            user: distributor.creator
+                        }) %>
+                    </td>
+                <% end %>
+
                 <% if get_columns(params).include?("created_at") %>
                     <td><%= distributor.created_at.strftime("%d/%m/%Y") %></td>
                 <% end %>
@@ -82,7 +110,22 @@
                                 text: '<i class="fa fa-edit"></i> '+t('edit'),
                                 href: erp_distributors.edit_backend_distributor_path(distributor)
                             },
-
+                            {
+                                text: '<i class="fa fa-eye-slash"></i> '+t('archive'),
+                               
+                                data_method: 'PUT',
+                               
+                                class: 'ajax-link',
+                                data_confirm: 'Bạn có muốn ngừng sử dụng thông tin cửa hàng này?'
+                            },
+                            {
+                                text: '<i class="fa fa-eye"></i> '+t('unarchive'),
+                              
+                                data_method: 'PUT',
+                               
+                                class: 'ajax-link',
+                                data_confirm: 'Bạn có muốn sử dụng lại thông tin cửa hàng này?'
+                            },
                             {
                                 divider: true
                             },
@@ -104,4 +147,5 @@
     <div class="datalist-empty-line"><%= t('.no_matching_records_found') %></div>
 <% end %>
 
+<%= erp_datalist_pagination(@distributors) %>
 
