@@ -49,7 +49,8 @@
                 </td>
                <% if get_columns(params).include?("image") %>
                     <td>
-                        image
+                        <img src="<%= distributor.image.present? ? distributor.image.smaller : url_for("/backend/img/image-coming-soon.jpg") %>"
+                        class="img-fluid" alt="logo">
                     </td>
                 <% end %>
                 <% if get_columns(params).include?("name") %>
