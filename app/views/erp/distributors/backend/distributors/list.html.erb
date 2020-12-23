@@ -49,7 +49,8 @@
                 </td>
                <% if get_columns(params).include?("image") %>
                     <td>
-                        image
+                        <img src="<%= distributor.image.present? ? distributor.image.smaller : url_for("/backend/img/image-coming-soon.jpg") %>"
+                        class="img-fluid" alt="logo">
                     </td>
                 <% end %>
                 <% if get_columns(params).include?("name") %>
@@ -83,11 +84,11 @@
                 
                  <% if get_columns(params).include?("status") %>
                     <td>
-                       
-                            <%# <span class="label label-sm label-danger">Ngưng sử dụng</span> %>
-                       
-                            <span class="label label-sm label-success">Đang sử dụng</span>
-                     
+                        <% if distributor.archived == true %>
+                            <span class="label label-sm label-danger"><%= 'Ngưng sử dụng' %></span>
+                        <% else %>
+                            <span class="label label-sm label-success"><%= 'Đang sử dụng' %></span>
+                        <% end %>
                     </td>
                 <% end %>
               
@@ -112,17 +113,17 @@
                             },
                             {
                                 text: '<i class="fa fa-eye-slash"></i> '+t('archive'),
-                               
+                                url: erp_distributors.archive_backend_distributors_path(id: distributor),
                                 data_method: 'PUT',
-                               
+                                hide: distributor.archived,
                                 class: 'ajax-link',
                                 data_confirm: 'Bạn có muốn ngừng sử dụng thông tin cửa hàng này?'
                             },
                             {
                                 text: '<i class="fa fa-eye"></i> '+t('unarchive'),
-                              
+                                url: erp_distributors.unarchive_backend_distributors_path(id: distributor),
                                 data_method: 'PUT',
-                               
+                                hide: !distributor.archived,
                                 class: 'ajax-link',
                                 data_confirm: 'Bạn có muốn sử dụng lại thông tin cửa hàng này?'
                             },
