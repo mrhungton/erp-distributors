@@ -12,6 +12,11 @@
                     <%= 'Tên cửa hàng' %>
                 </th>
             <% end %>
+            <% if get_columns(params).include?("phone") %>
+                <th>
+                    <%= 'Số điện thoại' %>
+                </th>
+            <% end %>
             <% if get_columns(params).include?("address") %>
                 <th>
                     <%= 'Địa chỉ' %>
@@ -20,13 +25,13 @@
             <% if get_columns(params).include?("open_time") %>
                 <th><%= 'Thời gian hoạt động' %></th>
             <% end %>
-           
+
              <% if get_columns(params).include?("latitude") %>
                 <th><%= 'Vĩ độ' %></th>
             <% end %>
             <% if get_columns(params).include?("longitude") %>
                 <th><%= 'Kinh độ' %></th>
-            <% end %> 
+            <% end %>
             <% if get_columns(params).include?("status") %>
                 <th><%= 'Trạng thái' %></th>
             <% end %>
@@ -58,30 +63,35 @@
                         <%= link_to distributor.name, erp_distributors.edit_backend_distributor_path(distributor), class: 'title' %>
                     </td>
                 <% end %>
+                <% if get_columns(params).include?("phone") %>
+                    <td>
+                        <%= distributor.phone %>
+                    </td>
+                <% end %>
                 <% if get_columns(params).include?("address") %>
                     <td>
-                        <%= distributor.address %>                        
+                        <%= distributor.address %>
                     </td>
                 <% end %>
-              
+
                 <% if get_columns(params).include?("open_time") %>
                     <td>
-                        <%= distributor.open_time %>                        
+                        <%= distributor.open_time %>
                     </td>
                 <% end %>
-                
+
                  <% if get_columns(params).include?("latitude") %>
                     <td>
-                        <%= distributor.latitude %>                        
+                        <%= distributor.latitude %>
                     </td>
                 <% end %>
 
                 <% if get_columns(params).include?("longitude") %>
                     <td>
-                        <%= distributor.longitude %>                        
+                        <%= distributor.longitude %>
                     </td>
                 <% end %>
-                
+
                  <% if get_columns(params).include?("status") %>
                     <td>
                         <% if distributor.archived == true %>
@@ -91,7 +101,7 @@
                         <% end %>
                     </td>
                 <% end %>
-              
+
                 <% if get_columns(params).include?("creator") %>
                     <td>
                         <%= erp_component('avatar', {
@@ -103,7 +113,7 @@
                 <% if get_columns(params).include?("created_at") %>
                     <td><%= distributor.created_at.strftime("%d/%m/%Y") %></td>
                 <% end %>
-               
+
                 <td class="text-right">
                     <%= erp_datalist_row_actions(
                         [

@@ -6,8 +6,10 @@ vi:
           attributes:
             name:
               taken: " đã tồn tại!"
-            nnnn:
-            
+            phone:
+              blank: " không được trống "
+
     attributes:
       erp/distributors/distributor:
         name: "Tên cửa hàng"
+        phone: "Số điện thoại"

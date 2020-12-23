@@ -4,7 +4,7 @@ module Erp::Distributors
     belongs_to :creator, class_name: 'Erp::User'
     mount_uploader :image, Erp::Distributors::DistributorImageUploader
 
-    validates :address, :open_time, :latitude, :longitude, presence: true
+    validates :phone, :address, :open_time, :latitude, :longitude, presence: true
     validates :name, uniqueness: true, presence: true
 
     validates :image, allow_blank: true, format: {
@@ -79,7 +79,7 @@ module Erp::Distributors
 
       query = query.limit(8).map{|distributor| {value: distributor.id, text: distributor.name} }
     end
-    
+
     def archive
 			update_columns(archived: true)
 		end
@@ -95,6 +95,5 @@ module Erp::Distributors
     def self.unarchive_all
 			update_all(archived: false)
     end
-    
   end
 end
