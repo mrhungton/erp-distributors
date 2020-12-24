@@ -174,7 +174,7 @@ module Erp
 
           # Only allow a trusted parameter "white list" through.
           def distributor_params
-            params.fetch(:distributor, {}).permit(:name, :address, :image, :open_time, :latitude, :longitude, :phone)
+            params.fetch(:distributor, {}).permit(:name, :address, :image, :open_time, :latitude, :longitude, :phone, :district_id, :state_id)
           end
 
       end

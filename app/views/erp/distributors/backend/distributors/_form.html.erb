@@ -35,6 +35,8 @@
                                     errors: distributor.errors.full_messages_for(:open_time)
                                 }) %>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                  <%= erp_form_control('text', {
                                     name: 'distributor[phone]',
@@ -43,6 +45,42 @@
                                     placeholder: 'Nhập số điện thoại (Ví dụ: (186)285-7925)',
                                     required: true,
                                     errors: distributor.errors.full_messages_for(:phone)
+                                }) %>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <%= erp_form_control("dataselect", {
+                                    name: 'distributor[state_id]',
+                                    value: distributor.state_id,
+                                    text: distributor.state_name,
+                                    placeholder: 'Nhập tên tỉnh thành hoặc phố',
+                                    label: 'Tỉnh/Thành phố',
+                                    required: true,
+                                    url: erp_areas.dataselect_backend_states_path(format: 'json'),
+                                    create: {
+                                        url: erp_areas.new_backend_state_path,
+                                        title: t('.create'),
+                                        container_selector: '.new_state',
+                                        input_selector: 'input[name="state[name]"]'
+                                    },
+                                    parent_control: "input[name='distributor[country_id]']",
+                                    parent_id: "country_id"
+                                }) %>
+                            </div>
+
+                            <div class="col-md-6">
+                                <%= erp_form_control("dataselect", {
+                                    name: 'distributor[district_id]',
+                                    value: distributor.district_id,
+                                    text: distributor.district_name,
+                                    placeholder: 'Nhập tên quận, huyện',
+                                    label: 'Quận/Huyện',
+                                    required: true,
+                                    url: erp_areas.dataselect_backend_districts_path(format: 'json'),
+                                    parent_control: "input[name='distributor[state_id]']",
+                                    parent_id: "state_id"
                                 }) %>
                             </div>
                         </div>

@@ -8,8 +8,14 @@ vi:
               taken: " đã tồn tại!"
             phone:
               blank: " không được trống "
+            state_id:
+              blank: " không được trống"
+            district_id:
+              blank: " không được trống"
 
     attributes:
       erp/distributors/distributor:
         name: "Tên cửa hàng"
         phone: "Số điện thoại"
+        state_id: "Tỉnh/Thành phố"
+        district_id: "Quận/Huyện"
