@@ -1,16 +1,29 @@
 module Erp::Distributors
   class Distributor < ApplicationRecord
 
+    belongs_to :country, class_name: 'Erp::Areas::State', optional: true
+    belongs_to :state, class_name: 'Erp::Areas::State'
+    belongs_to :district, class_name: 'Erp::Areas::District'
     belongs_to :creator, class_name: 'Erp::User'
     mount_uploader :image, Erp::Distributors::DistributorImageUploader
 
-    validates :address, :open_time, :latitude, :longitude, presence: true
+    validates :state_id, :district_id, :phone, :address, :open_time, :latitude, :longitude, presence: true
     validates :name, uniqueness: true, presence: true
 
     validates :image, allow_blank: true, format: {
 			with: %r{\.(gif|jpg|png)\Z}i,
 			message: 'URL hình ảnh phải có định dạng: GIF, JPG hoặc PNG.'
-		}
+    }
+
+    # state name
+    def state_name
+      state.present? ? state.name : ''
+    end
+
+    # district name
+    def district_name
+      district.present? ? district.name : ''
+    end
 
     # Filters
     def self.filter(query, params)
@@ -79,7 +92,7 @@ module Erp::Distributors
 
       query = query.limit(8).map{|distributor| {value: distributor.id, text: distributor.name} }
     end
-    
+
     def archive
 			update_columns(archived: true)
 		end
@@ -95,6 +108,5 @@ module Erp::Distributors
     def self.unarchive_all
 			update_all(archived: false)
     end
-    
   end
 end

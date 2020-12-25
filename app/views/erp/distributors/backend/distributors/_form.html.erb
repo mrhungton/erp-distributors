@@ -18,7 +18,7 @@
                             <div class="col-md-6">
                                 <%= erp_form_control("text", {
                                     name: 'distributor[name]',
-                                    value: distributor.name,                   
+                                    value: distributor.name,
                                     label: 'Tên cửa hàng',
                                     placeholder: 'Nhập tên cho cửa hàng',
                                     required: true,
@@ -28,7 +28,7 @@
                             <div class="col-md-6">
                                  <%= erp_form_control('text', {
                                     name: 'distributor[open_time]',
-                                    value: distributor.open_time,                   
+                                    value: distributor.open_time,
                                     label: 'Thời gian hoạt động',
                                     placeholder: 'Nhập thời gian đóng, mở cửa (Ví dụ: 7h A.M – 22h P.M)',
                                     required: true,
@@ -36,12 +36,60 @@
                                 }) %>
                             </div>
                         </div>
-                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                 <%= erp_form_control('text', {
+                                    name: 'distributor[phone]',
+                                    value: distributor.phone,
+                                    label: 'Số điện thoại',
+                                    placeholder: 'Nhập số điện thoại (Ví dụ: (186)285-7925)',
+                                    required: true,
+                                    errors: distributor.errors.full_messages_for(:phone)
+                                }) %>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <%= erp_form_control("dataselect", {
+                                    name: 'distributor[state_id]',
+                                    value: distributor.state_id,
+                                    text: distributor.state_name,
+                                    placeholder: 'Nhập tên tỉnh thành hoặc phố',
+                                    label: 'Tỉnh/Thành phố',
+                                    required: true,
+                                    url: erp_areas.dataselect_backend_states_path(format: 'json'),
+                                    create: {
+                                        url: erp_areas.new_backend_state_path,
+                                        title: t('.create'),
+                                        container_selector: '.new_state',
+                                        input_selector: 'input[name="state[name]"]'
+                                    },
+                                    parent_control: "input[name='distributor[country_id]']",
+                                    parent_id: "country_id"
+                                }) %>
+                            </div>
+
+                            <div class="col-md-6">
+                                <%= erp_form_control("dataselect", {
+                                    name: 'distributor[district_id]',
+                                    value: distributor.district_id,
+                                    text: distributor.district_name,
+                                    placeholder: 'Nhập tên quận, huyện',
+                                    label: 'Quận/Huyện',
+                                    required: true,
+                                    url: erp_areas.dataselect_backend_districts_path(format: 'json'),
+                                    parent_control: "input[name='distributor[state_id]']",
+                                    parent_id: "state_id"
+                                }) %>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-12">
                                <%= erp_form_control("text", {
                                     name: 'distributor[address]',
-                                    value: distributor.address,                   
+                                    value: distributor.address,
                                     label: 'Địa chỉ cửa hàng',
                                     required: true,
                                     placeholder: 'Nhập chi tiết địa chỉ của cửa hàng (Số nhà, tên đường, quận, huyện,…)',
@@ -49,12 +97,12 @@
                                 }) %>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-md-6">
                                 <%= erp_form_control("text", {
                                     name: 'distributor[latitude]',
-                                    value: distributor.latitude,                   
+                                    value: distributor.latitude,
                                     label: 'Nhập vĩ độ (latitude)',
                                     placeholder: 'Nhập chính xác vĩ độ của cửa hàng (Ví dụ: 10.792294)',
                                     required: true,
@@ -64,7 +112,7 @@
                             <div class="col-md-6">
                                  <%= erp_form_control('text', {
                                     name: 'distributor[longitude]',
-                                    value: distributor.longitude,                   
+                                    value: distributor.longitude,
                                     label: 'Nhập kinh độ (longitude) ',
                                     placeholder: 'Nhập chính xác kinh độ của cửa hàng (Ví dụ: 106.675193)',
                                     required: true,

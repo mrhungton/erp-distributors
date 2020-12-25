@@ -4,7 +4,7 @@ module Erp
       class DistributorsController < Erp::Backend::BackendController
         before_action :set_distributor, only: [:archive, :unarchive, :show, :edit, :update, :destroy]
         before_action :set_distributors, only: [:delete_all, :archive_all, :unarchive_all]
-        
+
         # GET /distributors
         def list
           @distributors = Distributor.all.paginate(:page => params[:page], :per_page => 10)
@@ -88,7 +88,7 @@ module Erp
 
         def delete_all
           @distributors.destroy_all
-          
+
           respond_to do |format|
             format.json {
               render json: {
@@ -174,7 +174,7 @@ module Erp
 
           # Only allow a trusted parameter "white list" through.
           def distributor_params
-            params.fetch(:distributor, {}).permit(:name, :address, :image, :open_time, :latitude, :longitude)
+            params.fetch(:distributor, {}).permit(:name, :address, :image, :open_time, :latitude, :longitude, :phone, :district_id, :state_id)
           end
 
       end

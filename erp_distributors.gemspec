@@ -7,12 +7,14 @@ require "erp/distributors/version"
 Gem::Specification.new do |s|
   s.name        = "erp_distributors"
   s.version     = Erp::Distributors::VERSION
-  s.authors     = ["Hung Nguyen", 
-                    "Hien Nguyen", 
-                    "Tu Hoang"]
+  s.authors     = ["Hung Nguyen",
+                  "Hien Nguyen",
+                  "Tu Hoang",
+                  "Huy Nguyen"]
   s.email       = ["nguyenvinhhientv1590@gmail.com",
-                    "mrhungton@gmail.com",
-                    "hoangtukg295@gmail.com"]
+                  "mrhungton@gmail.com",
+                  "hoangtukg295@gmail.com",
+                  "patrick204nqh@gmail.com"]
   s.homepage    = "http://globalnaturesoft.com/"
   s.summary     = "Distrubutors features of website E-commerce."
   s.description = "Distrubutors features of website E-commerce."
@@ -23,5 +25,5 @@ Gem::Specification.new do |s|
   s.add_dependency "rails"
   s.add_dependency "erp_core"
   s.add_dependency "deface"
-  
+
 end
