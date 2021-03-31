@@ -41,8 +41,9 @@
                                  <%= erp_form_control('text', {
                                     name: 'distributor[phone]',
                                     value: distributor.phone,
-                                    label: 'Số điện thoại',
-                                    placeholder: 'Nhập số điện thoại (Ví dụ: (186)285-7925)',
+                                    label: 'Số điện thoại (Có thể nhập nhiều số)',
+                                    placeholder: 'Nhập số điện thoại (Ví dụ: (+84)123654789 | (+84)543678111 )',
+                                    help: "Ngăn cách nhau bởi dấu gạch đứng | hay dấu phẩy , hoặc dấu chấm phẩy ;",
                                     required: true,
                                     errors: distributor.errors.full_messages_for(:phone)
                                 }) %>
